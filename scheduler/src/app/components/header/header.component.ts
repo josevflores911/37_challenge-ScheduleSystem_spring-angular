@@ -1,14 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.css'],
 })
-export class AppComponent {
-  title = 'scheduler';
-  showHeader = true;
+export class HeaderComponent implements OnInit {
 
   items: MenuItem[] | undefined;
 
@@ -137,4 +135,4 @@ export class AppComponent {
             }
         ];
     }
-}
+  }

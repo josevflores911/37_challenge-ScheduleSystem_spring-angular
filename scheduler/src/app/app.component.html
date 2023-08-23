@@ -1,1 +1,15 @@
-<h1>Hello</h1>
+<app-navbar></app-navbar>
+
+
+<p-card>
+    COntent
+</p-card>
+
+
+<app-header *ngIf="showHeader"></app-header>
+<!-- <p-confirmDialog></p-confirmDialog> -->
+<rang-toast></rang-toast>
+<div [class.router-container]="showHeader">
+  <router-outlet></router-outlet>
+</div>
+<app-footer></app-footer>
