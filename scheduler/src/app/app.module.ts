@@ -8,19 +8,27 @@ import { NavbarComponent } from './navbar/navbar/navbar.component';
 import { ComponentsModule } from './components/components.module';
 import { PrimeNGModule } from './primeng.module';
 
+import { TestComponent } from './test/test.component';
+import { PatientService } from './services/patient.service';
+import {  HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+   TestComponent
   ],
   imports: [
     ComponentsModule,
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     PrimeNGModule
+   
+   
 
   ],
-  providers: [],
+  providers: [PatientService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

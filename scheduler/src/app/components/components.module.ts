@@ -6,6 +6,7 @@ import { ToastComponent } from './toast/toast.component';
 
 
 
+
 @NgModule({
   imports: [
     PrimeNGModule
@@ -13,9 +14,8 @@ import { ToastComponent } from './toast/toast.component';
   exports: [HeaderComponent, FooterComponent,ToastComponent],
   declarations: [
     HeaderComponent,
-
     FooterComponent,
-    ToastComponent
+    ToastComponent,
   ],
   providers: [],
 })

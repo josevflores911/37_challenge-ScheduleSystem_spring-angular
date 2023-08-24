@@ -1,15 +1,29 @@
+
+
 <app-navbar></app-navbar>
-
-
+<nav>
+  <a routerLink="/">Home</a>
+  <a routerLink="/games">games</a>
+  <a href="http://localhost:8080/patient/hello">patient</a>
+  <a href="http://localhost:8080/schedule/hello">schedule</a>
+  
+</nav>
 <p-card>
     COntent
 </p-card>
-
-
 <app-header *ngIf="showHeader"></app-header>
-<!-- <p-confirmDialog></p-confirmDialog> -->
-<rang-toast></rang-toast>
-<div [class.router-container]="showHeader">
-  <router-outlet></router-outlet>
-</div>
+
+<h1>{{message}}</h1>
+
+<router-outlet></router-outlet>
 <app-footer></app-footer>
+<!--
+  
+  
+  <p-confirmDialog></p-confirmDialog> 
+  <rang-toast></rang-toast>
+  <div [class.router-container]="showHeader">
+    
+  </div>
+
+-->

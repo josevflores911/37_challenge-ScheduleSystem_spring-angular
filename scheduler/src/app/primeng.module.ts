@@ -64,9 +64,6 @@ import { GalleriaModule} from 'primeng/galleria';
 import { TooltipModule} from 'primeng/tooltip';
 import { PaginatorModule} from 'primeng/paginator';
 
-
-
-
 const formModules = [
   AutoCompleteModule,
   InputTextModule,

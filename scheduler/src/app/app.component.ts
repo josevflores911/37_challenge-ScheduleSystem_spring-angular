@@ -1,19 +1,87 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { PatientService } from './services/patient.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'scheduler';
-  showHeader = true;
+    title = 'scheduler';
+    showHeader = true;
 
-  items: MenuItem[] | undefined;
+    items: MenuItem[] | undefined;
+
+    constructor(private patientService: PatientService) { }
+
+
+    public message:string='';
+
 
     ngOnInit() {
-        this.items = [
+        this.getMessageTest();
+    }
+
+    public getMessageTest(): void { 
+        this.patientService.getTry().subscribe(
+            (res:string)=>{
+                this.message=res;
+            },
+            (error:HttpErrorResponse)=>{
+                console.log(error.message);
+            }
+        )
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* this.items = [
             {
                 label: 'File',
                 icon: 'pi pi-fw pi-file',
@@ -135,6 +203,4 @@ export class AppComponent {
                 label: 'Quit',
                 icon: 'pi pi-fw pi-power-off'
             }
-        ];
-    }
-}
+        ]; */
