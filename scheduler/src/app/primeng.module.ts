@@ -16,9 +16,11 @@ import { DropdownModule } from 'primeng/dropdown';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputSwitchModule } from 'primeng/inputswitch';
+
+
 // Panel
 import { PanelModule } from 'primeng/panel';
-import { CardModule } from 'primeng/card';
+import { CardModule } from 'primeng/card';//------------
 import { ToolbarModule } from 'primeng/toolbar';
 import { FieldsetModule } from 'primeng/fieldset';
 import { DividerModule } from 'primeng/divider';
@@ -63,6 +65,9 @@ import { ChipModule } from 'primeng/chip';
 import { GalleriaModule} from 'primeng/galleria';
 import { TooltipModule} from 'primeng/tooltip';
 import { PaginatorModule} from 'primeng/paginator';
+
+import { TagModule } from 'primeng/tag';
+
 
 const formModules = [
   AutoCompleteModule,
@@ -126,7 +131,8 @@ const extras = [PaginatorModule, ChipModule,GalleriaModule,TooltipModule,ImageMo
     ...directiveModules,
     ...miscModules,
     ...dataDisplayModules,
-    ...extras
+    ...extras,
+    TagModule
 
   ],
   exports: [
@@ -139,7 +145,8 @@ const extras = [PaginatorModule, ChipModule,GalleriaModule,TooltipModule,ImageMo
     ...directiveModules,
     ...miscModules,
     ...dataDisplayModules,
-    ...extras
+    ...extras,
+    TagModule
   ],
 })
 export class PrimeNGModule { }

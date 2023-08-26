@@ -1,0 +1,118 @@
+<div style=" overflow: hidden;">
+    <p-table #dt1 [value]="patients" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
+        [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [paginator]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [globalFilterFields]="['name', 'country.name', 'agent.name', 'status']">
+        <ng-template pTemplate="caption">
+            <div class="flex">
+                <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+                    (click)="clear(dt1)"></button>
+                <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" placeholder="Search keyword" />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="min-width:15rem">
+                    <div class="flex align-items-center">
+                        Patient
+                        
+                    </div>
+                </th>
+                <th style="min-width:15rem">
+                    <div class="flex align-items-center">
+                        Address
+                        
+                    </div>
+                </th>
+                <th style="min-width:15rem">
+                    <div class="flex align-items-center">
+                        Agent
+                        
+                    </div>
+                </th>
+                <th style="min-width:10rem">
+                    <div class="flex align-items-center">
+                        Register Date
+                        
+                    </div>
+                </th>
+                <th style="min-width:10rem">
+                    <div class="flex align-items-center">
+                        Age
+                        
+                    </div>
+                </th>
+                <th style="min-width:10rem">
+                    <div class="flex align-items-center">
+                        Priority
+                    </div>
+                </th>
+
+
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-patient>
+            <tr>
+                <td>
+                    {{ patient.name+' '+patient.lastName }}
+                </td>
+                <td>
+                    <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
+                        [class]="'flag flag-' + patient.address.state" style="width: 20px" />
+                    <span class="ml-1 vertical-align-middle">{{ "("+patient.address.state+") "
+                        +patient.address.description }}</span>
+                </td>
+                <td>
+                    <img [alt]="patient.agent.name"
+                        src="https://primefaces.org/cdn/primeng/images/demo/avatar/{{ patient.agent.image }}" width="32"
+                        style="vertical-align: middle" />
+                    <span class="ml-1 vertical-align-middle">{{ patient.agent.name }}</span>
+                </td>
+                <td>
+                    {{ patient.register | date: 'MM/dd/yyyy' }}
+                </td>
+                <td>
+                    {{ patient.age }}
+                </td>
+                <td>
+                    <p-tag [value]="patient.status" severity={{getSeverity(patient.status)}}></p-tag>
+                </td>
+
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="7">No patients found.</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+
+
+
+
+<!-- 
+<div *ngFor="let patient of patients" style="display:inline-block; background-color: blanchedalmond; margin: 30px">
+
+<div style="display: block; background-color: red;  width: 20px; height: 20px;">{{patient.name}}</div>
+
+<p-card header="Advanced Card" subheader="Card Subheader" [style]="{ width: '360px' }">
+    <ng-template pTemplate="header">
+        <img alt="Card" src="https://primefaces.org/cdn/primeng/images/usercard.png" />
+    </ng-template>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
+        quas!
+    </p>
+    <ng-template pTemplate="footer">
+        <p-button label="Save" icon="pi pi-check"></p-button>
+        <p-button label="Cancel" icon="pi pi-times" styleClass="p-button-secondary" [style]="{ 'margin-left': '.5em' }"></p-button>
+    </ng-template>
+</p-card>
+</div>
+
+ -->
