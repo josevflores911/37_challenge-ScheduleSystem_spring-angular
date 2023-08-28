@@ -1,7 +1,10 @@
 package com.rang.scheduler.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.io.Serializable;
 
 @Entity(name="Agent")
 @Table(name="agent")
@@ -10,7 +13,8 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Agent {
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
+public class Agent implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

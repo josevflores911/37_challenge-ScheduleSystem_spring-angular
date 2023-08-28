@@ -1,7 +1,11 @@
 package com.rang.scheduler.controllers;
 
+import com.rang.scheduler.entities.Address;
+import com.rang.scheduler.entities.Agent;
 import com.rang.scheduler.entities.Patient;
 
+import com.rang.scheduler.repositories.AddressRepository;
+import com.rang.scheduler.repositories.AgentRepository;
 import com.rang.scheduler.repositories.PatientRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +24,11 @@ public class PatientController {
 
     @Autowired
     private PatientRepository patientRepository;
+    @Autowired
+    private AddressRepository addressRepository;
+
+    @Autowired
+    private AgentRepository agentRepository;
 
 
     @GetMapping("/hello")
@@ -30,7 +39,14 @@ public class PatientController {
     @PostMapping("/add")
     public ResponseEntity<Patient> addData(@RequestBody Patient data) {
 
-        Patient patient = patientRepository.save(data);
+        Address address =addressRepository.getReferenceById(data.getAddress().getId());
+        Agent agent =agentRepository.getReferenceById(data.getAgent().getId());
+
+        Patient newPatient = data;
+        newPatient.setAddress(address);
+        newPatient.setAgent(agent);
+
+        Patient patient = patientRepository.save(newPatient);
 
         return ResponseEntity.ok(patient);
     }
