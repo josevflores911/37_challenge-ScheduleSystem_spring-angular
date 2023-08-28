@@ -2,17 +2,12 @@
 import { NgModule } from '@angular/core';
 // Form
 import { AutoCompleteModule } from 'primeng/autocomplete';
-import { InputTextModule } from 'primeng/inputtext';
-import { InputNumberModule } from 'primeng/inputnumber';
-import { InputMaskModule } from 'primeng/inputmask';
 import { PasswordModule } from 'primeng/password';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ListboxModule } from 'primeng/listbox';
-import { CalendarModule } from 'primeng/calendar';
 import { InputTextareaModule } from 'primeng/inputtextarea';
-import { DropdownModule } from 'primeng/dropdown';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputSwitchModule } from 'primeng/inputswitch';
@@ -26,22 +21,17 @@ import { FieldsetModule } from 'primeng/fieldset';
 import { DividerModule } from 'primeng/divider';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 
-// Data
-import { TableModule } from 'primeng/table';
 
 // Dialog
 import { DialogModule } from 'primeng/dialog';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ToastModule } from 'primeng/toast';
 
 // Menu
 import { MenuModule } from 'primeng/menu';
 import { MenubarModule } from 'primeng/menubar';
 
-// Button
-import { ButtonModule } from 'primeng/button';
 import { SpeedDialModule } from 'primeng/speeddial';
 //import { SplitButtonModule } from 'primeng/splitbutton';
 
@@ -64,9 +54,20 @@ import { ImageModule } from 'primeng/image';
 import { ChipModule } from 'primeng/chip';
 import { GalleriaModule} from 'primeng/galleria';
 import { TooltipModule} from 'primeng/tooltip';
-import { PaginatorModule} from 'primeng/paginator';
 
+// Data
+// Button
+import { ButtonModule } from 'primeng/button';
+import { TableModule } from 'primeng/table';
+import { CalendarModule } from 'primeng/calendar';
 import { TagModule } from 'primeng/tag';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { DropdownModule } from 'primeng/dropdown';
+import { PaginatorModule} from 'primeng/paginator';
+import { InputMaskModule } from 'primeng/inputmask';
+
+import { ToastModule } from 'primeng/toast';
 
 
 const formModules = [

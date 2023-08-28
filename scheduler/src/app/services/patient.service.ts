@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from  '@angular/common/http';
+import { HttpClient, HttpHeaders } from  '@angular/common/http';
 import { Patient } from '../models/Patient';
 import { environment } from 'src/environments/environments';
 
@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environments';
 })
 export class PatientService {
 
+  
   private apiServerUrl=environment.apiBaseUrl;
   
   constructor(private http: HttpClient) { }
@@ -29,7 +30,8 @@ export class PatientService {
 
   //post(save)
   public addPatient(patient:Patient):Observable<Patient>{
-    return this.http.post<Patient>(`${this.apiServerUrl}/patient/add`,patient);
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<Patient>(`${this.apiServerUrl}/patient/add`,patient,{ headers });
   }
 
   //put(update)

@@ -1,17 +1,11 @@
 <app-header ></app-header>
+
+
 <router-outlet></router-outlet>
 
-<nav>
-  <a routerLink="/">Home</a>
-  <a routerLink="/games">games</a>
-  <a href="http://localhost:8080/patient/hello">patient</a>
-  <a href="http://localhost:8080/schedule/hello">schedule</a>
-  
-</nav>
-
-<app-patient></app-patient>
-
-
+<div style="margin: 30px;">
+  <app-patient></app-patient>
+</div>
 
 <app-footer></app-footer>
 <!--
@@ -22,5 +16,10 @@
   <div [class.router-container]="showHeader">
     
   </div>
+
+  <nav>
+  <a [routerLink]="['/home']" >Home</a>  
+  <a routerLink="/register">Patients</a>  
+</nav>
 
 -->

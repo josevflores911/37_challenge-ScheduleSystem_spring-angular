@@ -1,13 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TestComponent } from './test/test.component';
-import { AppComponent } from './app.component';
+import { HomeComponent } from './views/home/home.component';
+
 
 const routes: Routes = [
   {
-    path: 'games',
-    component:TestComponent
+    path: '',
+    component: HomeComponent
+  },
+  {
+    path: 'record', 
+    loadChildren: () =>
+      import('./views/patientRecord/record.module').then((m) => m.RecordModule),
+  },
+  {
+    path: 'home',
+    component: HomeComponent
+  },
+  {
+    path: '**',
+    redirectTo: ''
   }
+
 ];
 
 @NgModule({

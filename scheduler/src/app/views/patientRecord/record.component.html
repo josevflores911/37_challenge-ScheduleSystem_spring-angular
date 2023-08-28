@@ -1,0 +1,62 @@
+<div class="containers" style="border-bottom:  5px solid rgb(230, 51, 51);">
+
+    <h1>Patient Registration</h1>
+    <p>Please provide the following information to register a new patient:</p>
+    <div style="display: flex;">
+        <div class="input-field">
+
+            <p-calendar [(ngModel)]="date" class="p-inputtext-sm" aria-required="true"></p-calendar>
+        </div>
+        <div class="input-field">
+            <span class="p-float-label">
+                <input pInputText id="name" [(ngModel)]="name" class="p-inputtext-sm" required/>
+                <label htmlFor="name">name</label>
+            </span>
+        </div>
+        <div class="input-field">
+            <span class="p-float-label">
+                <input pInputText id="lastname" [(ngModel)]="lastname" class="p-inputtext-sm"  required/>
+                <label htmlFor="lastname">lastname</label>
+            </span>
+        </div>
+    </div>
+    <div style="display: flex;">
+        <div class="input-field">
+            <span class="p-float-label">
+                <input pInputText id="email" [(ngModel)]="email" class="p-inputtext-sm" required type="email"/>
+                <label htmlFor="email">email</label>
+            </span>
+        </div>
+        <div class="input-field">
+            <span class="p-float-label">
+                <input pInputText pKeyFilter="int" [(ngModel)]="age" class="p-inputtext-sm" required/>
+                <label htmlFor="age">age</label>
+            </span>
+        </div>
+        <div class="input-field">
+            <span class="p-float-label">
+                <p-inputMask mask="(999) 999-9999" [(ngModel)]="phone" placeholder="(999) 999-9999"
+                    class="p-inputtext-sm" ></p-inputMask>
+                <label htmlFor="phone">phone</label>
+            </span>
+        </div>
+    </div>
+    <div style="display: flex;">
+        <div class="input-field">
+
+            <p-dropdown [options]="address" [(ngModel)]="selectedaddress" optionLabel="state"
+                class="p-inputtext-sm" aria-required="true"></p-dropdown>
+        </div>
+        <div class="input-field">
+
+            <p-dropdown [options]="agent" [(ngModel)]="selectedagent" optionLabel="name" class="p-inputtext-sm"
+                (ngModelChange)="onDropdownChange($event)" aria-required="true"></p-dropdown>
+        </div>
+        <div class="input-field">
+
+            <p-dropdown [options]="tempStatus" [(ngModel)]="selectedstatus" optionLabel="code"
+                class="p-inputtext-sm" aria-required="true"></p-dropdown>
+        </div>
+    </div>
+    <p-button label="Submit" (click)="handleClick('value')" styleClass="p-button-raised"></p-button>
+</div>

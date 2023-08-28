@@ -1,28 +1,48 @@
-export interface Patient{
-    id:number;
-    name:string;
-    lastName:string;
-    register:string|Date;
-    address:Address;
-    agent?: Agent;
-    age:number;
-    status:Status;
+import { Address } from "./Address";
+import { Agent } from "./Agent";
 
-    phone:number;
-    email:string;
+export class Patient {
+    id?: number;
+    name: string;
+    lastName: string;
+    register: string | Date;
+    address: Address;
+    agent: Agent;
+    age: string;
+    status: string;
+    phone?: string;
+    email: string;
+
+    constructor(name:string, lastname:string, register:string, address:Address
+        ,agent:Agent,age:string,status:string,phone:string,email:string) {
+        
+        this.name = name;
+        this.lastName = lastname;
+        this.register = register;
+        this.address=address;
+        this.agent=agent;
+        this.age = age;
+        this.status=status;
+        this.phone=phone;
+        this.email = email;
+    }
+
+   
+
+
 }
 
-export interface Agent {
+/* export interface Agent {
     name?: string;
     image?: string;
-}
+} */
 
-export interface Address {
+/* export interface Address {
     state?: string;
     description?: string;
-}
+} */
 
-export enum Status{
-    HIGHER,MEDIUM,LOW,OTHER
-    
+export enum Status {
+    HIGHER, MEDIUM, LOW, OTHER
+
 }

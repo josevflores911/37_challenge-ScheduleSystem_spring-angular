@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 
+
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
@@ -13,22 +14,23 @@ export class HeaderComponent implements OnInit {
     ngOnInit() {
         this.items = [
             {
-                label: 'File',
+                label: 'Home',
                 icon: 'pi pi-fw pi-file',
-
+                routerLink: ['/home'],
+//
             },
             {
-                label: 'Edit',
+                label: 'Patients',
                 icon: 'pi pi-fw pi-pencil',
-
+                routerLink: ['/record'],
             },
             {
-                label: 'Users',
+                label: 'Schedules',
                 icon: 'pi pi-fw pi-user',
 
             },
             {
-                label: 'Events',
+                label: 'Users',
                 icon: 'pi pi-fw pi-calendar',
 
             },

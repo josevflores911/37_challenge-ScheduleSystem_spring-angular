@@ -36,17 +36,6 @@ export class PatientComponent {
     )
   }
 
-  
-
-  public getPatientsById(): void { }
-  public savePaients(): void { }
-  public updatePatients(): void { }
-  public deletePatients(): void { }
-
-
-  
-
-
   clear(table: Table) {
     table.clear();
   }
@@ -71,5 +60,15 @@ export class PatientComponent {
         return null;
     }
   }
+
+
+  
+  public getPatientsById(): void { }
+  public savePaients(): void { }
+  public updatePatients(): void { }
+  public deletePatients(): void { }
+
+
+  
 
 }
