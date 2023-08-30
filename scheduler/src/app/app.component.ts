@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { MenuItem } from 'primeng/api';
-import { PatientService } from './services/patient.service';
+import { PatientService } from './resources/services/patient.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -15,7 +14,7 @@ export class AppComponent {
     constructor(private patientService: PatientService) { }
 
     ngOnInit() {
-        this.getMessageTest();
+       // this.getMessageTest();
     }
 
     public getMessageTest(): void { 

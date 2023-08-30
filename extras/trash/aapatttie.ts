@@ -1,10 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Table } from 'primeng/table';
-import { Patient } from 'src/app/models/Patient';
+import { Patient } from 'src/app/resources/models/Patient';
 import { Customer, Representative } from 'src/trash/customer';
 import { CustomerService } from 'src/trash/customer.service';
-import { PatientService } from 'src/app/services/patient.service';
+import { PatientService } from 'src/app/resources/services/patient.service';
 
 @Component({
   selector: 'app-patient',

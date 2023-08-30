@@ -19,3 +19,118 @@ Finally add the Bootstrap CSS file to the apps[0].styles array in the angular.js
 
 -----------------------------------------------------------------
     this.http.get(`https://myapi.com/health`, {responseType: 'text'})
+-------------------------
+const newArr = [
+  ...arr,
+  "Salut",
+];
+
+-------------------------------------
+/* export interface Agent {
+    name?: string;
+    image?: string;
+} */
+
+/* export interface Address {
+    state?: string;
+    description?: string;
+} */
+
+----------------------------------------------
+  //post(save)
+  /* public addUser(user:User):Observable<ResponseLogin>{
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<User>(`${this.apiServerUrl}/login`,user,{ headers })
+    .pipe(
+      tap((loginResponse: ResponseLogin ) => (this.authService.loginResponse = loginResponse))
+    );
+  }  */
+
+//return this.http.get(`${this.apiServerUrl}/patient/hello`, {responseType: 'text'});
+  ----------------------------------------------------------------------------
+
+  /*saveSport(payload: string, id: string) {
+
+    const headers = new HttpHeaders();
+
+    headers.set('Content-Type', 'application/json; charset=utf-8');
+
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    };
+
+    if (id === null || id === '') {
+      return this.httpClient.post<SportsClass>(
+        config.apiEndpoints.sport.save,
+        payload,
+        httpOptions
+      );
+    }
+
+    return this.httpClient.put<SportsClass>(
+      config.apiEndpoints.sport.updateById(id),
+      payload,
+      httpOptions
+    )
+  }*/
+
+  ------------------------------------------------
+ //date: string | undefined=new Date().toJSON().slice(0,10).replace(/-/g,'/');
+
+=-------------------------------------------------------------------
+
+
+<!-- 
+<div *ngFor="let patient of patients" style="display:inline-block; background-color: blanchedalmond; margin: 30px">
+
+<div style="display: block; background-color: red;  width: 20px; height: 20px;">{{patient.name}}</div>
+
+<p-card header="Advanced Card" subheader="Card Subheader" [style]="{ width: '360px' }">
+    <ng-template pTemplate="header">
+        <img alt="Card" src="https://primefaces.org/cdn/primeng/images/usercard.png" />
+    </ng-template>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
+        quas!
+    </p>
+    <ng-template pTemplate="footer">
+        <p-button label="Save" icon="pi pi-check"></p-button>
+        <p-button label="Cancel" icon="pi pi-times" styleClass="p-button-secondary" [style]="{ 'margin-left': '.5em' }"></p-button>
+    </ng-template>
+</p-card>
+</div>
+
+ -->
+-------------------------------------------------------
+
+<!--
+  <nav>
+  <a [routerLink]="['/home']" >Home</a>  
+  <a routerLink="/register">Patients</a>  
+  <a routerLink="/login">login</a>  
+  <a routerLink="/schedule">schedule</a>  
+</nav>
+  
+  <p-confirmDialog></p-confirmDialog> 
+  <rang-toast></rang-toast>
+  <div [class.router-container]="showHeader">
+    
+  </div>
+
+ <div style="margin: 30px;">
+  <app-patient></app-patient>
+</div>
+
+-->
+
+
+
+
+
+
+
+
+
+
+  https://www.youtube.com/watch?v=ULBJQxp-Vrk&t=331s
+  https://www.youtube.com/watch?v=YUqi1IjLX8I

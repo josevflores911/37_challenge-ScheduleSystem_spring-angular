@@ -1,0 +1,22 @@
+<div class="containers" style="border-bottom:  5px solid rgb(230, 51, 51);display: flex;flex-direction: column;justify-content: center;align-items: center;">
+
+    <h1>Login</h1>
+    <p>Please provide the email an password for agent user:</p>
+    <div style="display: flex;">
+        <div class="input-field">
+            <span class="p-float-label">
+                <input pInputText id="clave" [(ngModel)]="clave" class="p-inputtext-sm" required/>
+                <label htmlFor="clave">clave</label>
+            </span>
+        </div>
+        <div class="input-field">
+            <span class="p-float-label">
+                <input pInputText id="login" [(ngModel)]="login" class="p-inputtext-sm"  required/>
+                <label htmlFor="login">login</label>
+            </span>
+        </div>
+    </div>
+  
+   
+    <p-button type="button" label="Submit" (click)="handleClick('value')" styleClass="p-button-raised"></p-button>
+</div>

@@ -1,9 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Table } from 'primeng/table';
-import { Patient } from 'src/app/models/Patient';
 
-import { PatientService } from 'src/app/services/patient.service';
+import { Patient } from 'src/app/resources/models/Patient';
+
+import { PatientService } from 'src/app/resources/services/patient.service';
 
 @Component({
   selector: 'app-patient',
@@ -12,7 +13,8 @@ import { PatientService } from 'src/app/services/patient.service';
 })
 export class PatientComponent {
 
-  public patients!: Patient[] ;
+  
+  public patients!: Patient[]
  
   loading: boolean = true;
 
@@ -23,15 +25,17 @@ export class PatientComponent {
   }
 
 
-  public getAllPatients(): void {
+   getAllPatients(): void {
+
     this.patientService.getPatients().subscribe(
-      (res: Patient[]) => {
-        this.patients = res;
+       async (res: Patient[]) => {
+         this.patients = await res;
         this.loading=false
         console.log(this.patients);
       },
       (error: HttpErrorResponse) => {
         console.log(error.message);
+        this.loading=false
       }
     )
   }

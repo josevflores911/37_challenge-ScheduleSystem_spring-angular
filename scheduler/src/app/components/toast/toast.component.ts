@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MessageService, Message} from 'primeng/api';
-import { config } from '../../services/config';
-import { notificationService } from 'src/app/services/notification.service';
+import { config } from '../../resources/services/config';
+import { notificationService } from 'src/app/resources/services/notification.service';
 
 @Component({
   selector: 'rang-toast',

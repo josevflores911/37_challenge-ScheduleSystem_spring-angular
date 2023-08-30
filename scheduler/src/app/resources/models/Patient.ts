@@ -26,21 +26,8 @@ export class Patient {
         this.phone=phone;
         this.email = email;
     }
-
-   
-
-
 }
 
-/* export interface Agent {
-    name?: string;
-    image?: string;
-} */
-
-/* export interface Address {
-    state?: string;
-    description?: string;
-} */
 
 export enum Status {
     HIGHER, MEDIUM, LOW, OTHER
