@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HeaderComponent } from 'src/app/components/header/header.component';
 
 @Component({
   selector: 'app-test',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+
+  ngOnInit() {
+     
+  }
 
 }

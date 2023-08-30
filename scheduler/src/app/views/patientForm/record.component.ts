@@ -66,6 +66,8 @@ export class RecordComponent {
 
   }
 
+ 
+
   handleClick(arg: string) {
 
     var jsonString = JSON.stringify((this.selectedstatus));

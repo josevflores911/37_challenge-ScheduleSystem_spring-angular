@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
+
 import { PrimeNGModule } from './../primeng.module';
 import { ToastComponent } from './toast/toast.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 
 @NgModule({
@@ -11,13 +13,17 @@ import { ToastComponent } from './toast/toast.component';
   ],
   exports: [
     HeaderComponent, 
+   
     FooterComponent,
-    ToastComponent
+    ToastComponent,
+    SidebarComponent
   ],
   declarations: [
     HeaderComponent,
+   
     FooterComponent,
-    ToastComponent
+    ToastComponent,
+    SidebarComponent
   ],
   providers: [],
 })

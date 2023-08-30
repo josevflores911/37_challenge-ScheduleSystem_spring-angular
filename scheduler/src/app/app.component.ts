@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { PatientService } from './resources/services/patient.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AuthService } from './resources/services/auth.service';
 
 @Component({
     selector: 'app-root',
@@ -10,8 +11,12 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class AppComponent {
     
     public message:string='';
+
+    validator:boolean;
     
-    constructor(private patientService: PatientService) { }
+    constructor(private patientService: PatientService,private authService:AuthService) { 
+        this.validator=!authService.getToken().option
+    }
 
     ngOnInit() {
        // this.getMessageTest();

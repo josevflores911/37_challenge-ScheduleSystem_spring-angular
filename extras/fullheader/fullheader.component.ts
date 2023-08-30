@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+/* import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { AuthService } from 'src/app/resources/services/auth.service';
@@ -6,11 +6,11 @@ import { LoginService } from 'src/app/resources/services/login.service';
 
 
 @Component({
-    selector: 'app-header',
-    templateUrl: './header.component.html',
-    styleUrls: ['./header.component.css'],
+    selector: 'app-fullheader',
+    templateUrl: './fullheader.component.html',
+    styleUrls: ['./fullheader.component.css'],
 })
-export class HeaderComponent implements OnInit {
+export class FullHeaderComponent implements OnInit {
 
     items: MenuItem[] | undefined;
       
@@ -82,3 +82,4 @@ export class HeaderComponent implements OnInit {
 }
 
 
+ */

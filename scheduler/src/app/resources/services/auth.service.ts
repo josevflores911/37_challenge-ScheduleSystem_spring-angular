@@ -8,12 +8,12 @@ export class AuthService {
 
   public loginResponse:Token | undefined;
 
-  getToken():string { 
+  getToken():menu { 
     const tokenStorage:string|null =localStorage.getItem('token')
     if(tokenStorage===null){
-      return ''
+      return new menu('',false)
     }else{
-      return tokenStorage.replace(/"/g, '');
+      return new menu(tokenStorage.replace(/"/g, ''),true)
     }
   }
 
@@ -22,7 +22,10 @@ export class AuthService {
   }
 
   removeToken(){
-    localStorage.removeItem("token")
+    localStorage.removeItem("token");
+    setTimeout(() => {
+      location.reload();
+    }, 10); 
   }
 
   
@@ -35,5 +38,13 @@ export class AuthService {
 
   public isAuthenticated():boolean{
     return Boolean( this.loginResponse?.jwTtoken);
+  }
+}
+export class menu{
+  token:string
+  option:boolean
+  constructor(token:string,option:boolean){
+    this.token=token
+    this.option=option
   }
 }

@@ -17,7 +17,7 @@ export class AddressService {
 
   //getAll
   public getAddress():Observable<Address[]>{
-    const token: string = this.authService.getToken();
+    const token: string = this.authService.getToken().token;
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + token.replace(/"/g, '')
     });

@@ -17,7 +17,7 @@ export class PatientService {
 
   public getTry(): Observable<any> {
 
-    const token: string = this.authService.getToken();
+    const token: string = this.authService.getToken().token;
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + token.replace(/"/g, ''),
       'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ export class PatientService {
   //getAll
   public getPatients(): Observable<Patient[]> {
 
-    const token: string = this.authService.getToken();
+    const token: any = this.authService.getToken().token;
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + token.replace(/"/g, '')
     });
@@ -47,7 +47,7 @@ export class PatientService {
   //post(save)
   public addPatient(patient: Patient): Observable<Patient> {
     //const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const token: string = this.authService.getToken();
+    const token: string = this.authService.getToken().token ;
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + token.replace(/"/g, '')
     });
