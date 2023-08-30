@@ -12,6 +12,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/schedule")
+@CrossOrigin("*")
 public class ScheduleController {
 
     @Autowired

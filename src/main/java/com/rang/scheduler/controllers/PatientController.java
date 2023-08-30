@@ -13,7 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -32,8 +34,10 @@ public class PatientController {
 
 
     @GetMapping("/hello")
-    public String sayHello() {
-        return "Hello, World!";
+    public ResponseEntity<Map> sayHello() {
+        Map map= new HashMap<>();
+        map.put("key","hello");
+        return ResponseEntity.ok(map);
     }
 
     @PostMapping("/add")
