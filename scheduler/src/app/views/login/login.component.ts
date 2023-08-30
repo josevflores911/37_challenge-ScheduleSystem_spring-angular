@@ -24,7 +24,10 @@ export class LoginComponent {
 
     this.loginService.doLogin(this.user).subscribe(
       (data)=>{
-        this.router.navigate(['/table']);  
+        setTimeout(() => {
+          this.router.navigate(['/table']);
+        }, 500); 
+          
       },
       error => {
         console.error('Error:', error);

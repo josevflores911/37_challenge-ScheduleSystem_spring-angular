@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit {
             {
                 label: 'Patients',
                 icon: 'pi pi-fw pi-pencil',
-                routerLink: ['/record'],
+                routerLink: ['/patient'],
                 visible:this.validatorToken
             },
             {

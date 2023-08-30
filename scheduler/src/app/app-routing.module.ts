@@ -5,6 +5,7 @@ import { LoginComponent } from './views/login/login.component';
 import { PatientComponent } from './views/patientTable/patient.component';
 import { AuthGuard, AuthGuardService } from './resources/services/auth-guard.service';
 import { ScheduleComponent } from './views/schedule/schedule.component';
+import { RecordComponent } from './views/patientForm/record.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,12 @@ const routes: Routes = [
     path: 'table',
     //canActivate: [AuthGuard],
     component: PatientComponent
+  },
+  {
+    path: 'patient',
+    loadChildren: () => import('./views/patientForm/record.module').then((m) => m.RecordModule),
+    //canActivate: [AuthGuard],
+    //loadChildren: () => import('./views/schedule/schedule.module').then((m) => m.ScheduleModule),
   },
    {
     path: 'schedule',

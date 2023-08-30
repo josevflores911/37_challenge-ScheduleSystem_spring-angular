@@ -46,7 +46,11 @@ export class PatientService {
 
   //post(save)
   public addPatient(patient: Patient): Observable<Patient> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    //const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const token: string = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token.replace(/"/g, '')
+    });
     return this.http.post<Patient>(`${this.apiServerUrl}/patient/add`, patient, { headers });
   }
 
