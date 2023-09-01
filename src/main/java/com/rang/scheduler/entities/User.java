@@ -1,4 +1,4 @@
-package com.rang.scheduler.entities.some;
+package com.rang.scheduler.entities;
 
 
 import jakarta.persistence.*;
@@ -13,19 +13,19 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-@Table(name = "usuarios")
-@Entity(name = "Usuario")
+@Table(name = "users")
+@Entity(name = "User")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Usuario implements UserDetails {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String login;
-    private String clave;
+    private String username;
+    private String password;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -34,12 +34,12 @@ public class Usuario implements UserDetails {
 
     @Override
     public String getPassword() {
-        return clave;
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return login;
+        return username;
     }
 
     @Override

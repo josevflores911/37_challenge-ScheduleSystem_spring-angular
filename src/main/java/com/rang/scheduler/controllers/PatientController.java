@@ -42,17 +42,17 @@ public class PatientController {
 
     @PostMapping("/add")
     public ResponseEntity<Patient> addData(@RequestBody Patient data) {
+//
+//        Address address =addressRepository.getReferenceById(data.getAddress().getId());
+//        Agent agent =agentRepository.getReferenceById(data.getAgent().getId());
+//
+//        data.setAddress(address);
+//        data.setAgent(agent);
 
-        Address address =addressRepository.getReferenceById(data.getAddress().getId());
-        Agent agent =agentRepository.getReferenceById(data.getAgent().getId());
+//        Patient patient = patientRepository.save(data);
+         patientRepository.save(data);
 
-        Patient newPatient = data;
-        newPatient.setAddress(address);
-        newPatient.setAgent(agent);
-
-        Patient patient = patientRepository.save(newPatient);
-
-        return ResponseEntity.ok(patient);
+        return ResponseEntity.ok(data);
     }
 
     @GetMapping("/get/{id}")
@@ -61,6 +61,17 @@ public class PatientController {
 
         if (patient != null) {
 
+            return ResponseEntity.ok(patient);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/getbydni/{dni}")
+    public ResponseEntity<Patient> getDataByDNI(@PathVariable String dni) {
+        Patient patient = patientRepository.findByDni(dni);
+
+        if (patient != null) {
             return ResponseEntity.ok(patient);
         } else {
             return ResponseEntity.notFound().build();
@@ -77,8 +88,10 @@ public class PatientController {
         Optional<Patient> optionalPatient = patientRepository.findById(id);
 
         if (optionalPatient.isPresent()) {
+
             Patient updatePatient = optionalPatient.get();
-            patientRepository.save(updatePatient);
+
+            patientRepository.save(newData);
             return ResponseEntity.ok("Patient updated successfully");
         } else {
             return ResponseEntity.notFound().build();
@@ -89,11 +102,7 @@ public class PatientController {
     public ResponseEntity deleteData(@PathVariable Long id) {
         Patient patient = patientRepository.getReferenceById(id);
 
-        if (patient != null) {
-            patientRepository.deleteById(id);
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        patientRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }

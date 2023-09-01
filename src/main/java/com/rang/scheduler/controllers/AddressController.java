@@ -1,7 +1,6 @@
 package com.rang.scheduler.controllers;
 
 import com.rang.scheduler.entities.Address;
-import com.rang.scheduler.entities.Patient;
 import com.rang.scheduler.repositories.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

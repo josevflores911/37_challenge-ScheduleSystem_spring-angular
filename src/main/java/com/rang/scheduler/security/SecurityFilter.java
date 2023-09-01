@@ -1,6 +1,6 @@
 package com.rang.scheduler.security;
 
-import com.rang.scheduler.entities.some.UsuarioRepository;
+import com.rang.scheduler.repositories.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,7 +20,7 @@ public class SecurityFilter extends OncePerRequestFilter {
     @Autowired
     private TokenService tokenService;
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UserRepository usuarioRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request
@@ -32,7 +32,7 @@ public class SecurityFilter extends OncePerRequestFilter {
             var nombreUsuario = tokenService.getSubject(token); // extract username
             if (nombreUsuario != null) {
                 // Token valido
-                var usuario = usuarioRepository.findByLogin(nombreUsuario);
+                var usuario = usuarioRepository.findByUsername(nombreUsuario);
                 var authentication = new UsernamePasswordAuthenticationToken(usuario, null,
                         usuario.getAuthorities()); // Forzamos un inicio de sesion
                 SecurityContextHolder.getContext().setAuthentication(authentication);

@@ -1,13 +1,12 @@
 package com.rang.scheduler.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.rang.scheduler.entities.areas.Status;
+import com.rang.scheduler.entities.utils.Status;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Random;
 
 @Entity(name="Patient")
 @Table(name="patient")
@@ -26,19 +25,23 @@ public class Patient implements Serializable {
     private String name;
     private String lastName;
     private LocalDate register;//need local date for age or int age
+    private String phone;
+    private String email;
+    private int age;
+
+    private String dni;
 
     @ManyToOne
     @JoinColumn(name = "address_id")
     private Address address;
+
     @ManyToOne
     @JoinColumn(name = "agent_id")
     private Agent agent;
-    private int age;
+
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    private int phone;
-    private String email;
 
 
 

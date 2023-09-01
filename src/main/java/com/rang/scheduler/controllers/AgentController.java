@@ -1,7 +1,6 @@
 package com.rang.scheduler.controllers;
 
 import com.rang.scheduler.entities.Agent;
-import com.rang.scheduler.entities.Patient;
 import com.rang.scheduler.repositories.AgentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +21,6 @@ public class AgentController {
         Agent agent = agentRepository.getReferenceById(id);
 
         if (agent != null) {
-
             return ResponseEntity.ok(agent);
         } else {
             return ResponseEntity.notFound().build();

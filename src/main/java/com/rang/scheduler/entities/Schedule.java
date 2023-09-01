@@ -1,6 +1,6 @@
 package com.rang.scheduler.entities;
 
-import com.rang.scheduler.entities.areas.Specialization;
+import com.rang.scheduler.entities.utils.Departments;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,7 +25,8 @@ public class Schedule implements Serializable {
 
     private LocalDate date;
 
-    private Specialization specialization;
+    @Enumerated(EnumType.STRING)
+    private Departments department;
 
 
 }

@@ -5,7 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.rang.scheduler.entities.some.Usuario;
+import com.rang.scheduler.entities.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -19,13 +19,13 @@ public class TokenService {
     @Value("${api.security.secret}")
     private String apiSecret;
 
-    public String generarToken(Usuario usuario) {
+    public String generarToken(User user) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(apiSecret);
             return JWT.create()
                     .withIssuer("voll med")
-                    .withSubject(usuario.getLogin())
-                    .withClaim("id", usuario.getId())
+                    .withSubject(user.getUsername())
+                    .withClaim("id", user.getId())
                     .withExpiresAt(generarFechaExpiracion())
                     .sign(algorithm);
         } catch (JWTCreationException exception){

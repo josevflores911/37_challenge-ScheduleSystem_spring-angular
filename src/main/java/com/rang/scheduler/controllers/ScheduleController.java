@@ -18,18 +18,12 @@ public class ScheduleController {
     @Autowired
     private ScheduleRepository scheduleRepository;
 
-
-    @GetMapping("/hello")
-    public String sayHello() {
-        return "Hello, World!";
-    }
-
     @PostMapping("/add")
     public ResponseEntity<Schedule> addData(@RequestBody Schedule data) {
 
-        Schedule schedule = scheduleRepository.save(data);
+       scheduleRepository.save(data);
 
-        return ResponseEntity.ok(schedule);
+        return ResponseEntity.ok(data);
     }
 
     @GetMapping("/get/{id}")
