@@ -1,0 +1,17 @@
+.input-field {
+    border-radius: 10px;
+    margin: 10px;
+    padding: 5px;
+}
+
+.containers {
+    padding: 10px 0 10px 0;
+    margin: 10px 0 10px 0 ;
+    background: rgb(167, 233, 195);
+    background: linear-gradient(90deg, rgba(167, 233, 195, 1) 0%, rgba(148, 174, 228, 1) 10%, rgba(61, 77, 68, 1) 200%);
+    color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+}

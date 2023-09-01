@@ -19,7 +19,7 @@ import { RecordModule } from './views/patientForm/record.module';
 import { LoginComponent } from './views/login/login.component';
 
 import { PatientComponent } from './views/patientTable/patient.component';
-//import { ScheduleComponent } from './views/schedule/schedule.component';
+import { ScheduleComponent } from './views/schedule/schedule.component';
 import { AuthInterceptor } from './resources/services/auth.interceptor';
 
 
@@ -28,11 +28,12 @@ import { AuthInterceptor } from './resources/services/auth.interceptor';
     AppComponent,
     HomeComponent,
     LoginComponent,
-    PatientComponent
-    //ScheduleComponent,
+    PatientComponent,
+    ScheduleComponent,
   ],
   imports: [
     ComponentsModule,
+    
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,

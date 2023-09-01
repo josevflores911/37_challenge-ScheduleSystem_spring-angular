@@ -11,8 +11,8 @@ import { LoginService } from 'src/app/resources/services/login.service';
 export class LoginComponent {
 
   user:User =new User('','');
-  clave:string="";
-  login:string="";
+  password:string="";
+  username:string="";
 
   constructor(private loginService:LoginService,private router:Router){  }
   ngOnInit() {
@@ -26,15 +26,15 @@ export class LoginComponent {
   handleClick(arg: string) {
 
     //this.user=new User(this.clave,this.login);
-    this.user.clave=this.clave;
-    this.user.login=this.login;
+    this.user.password=this.password;
+    this.user.username=this.username;
     console.log(this.user)
 
     this.loginService.doLogin(this.user).subscribe(
       (data)=>{
-        setTimeout(() => {
+     /*    setTimeout(() => { */
           this.router.navigate(['/table']);
-        }, 1000); 
+       /*  }, 1000);  */
        
       },
       error => {

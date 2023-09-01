@@ -63,10 +63,12 @@ export class HeaderComponent implements OnInit {
                 label: 'Login',
                 icon: 'pi pi-fw pi-calendar',
                 routerLink: ['/login'],
+                visible:!this.validatorToken
             },
             {
                 label: 'Quit',
                 icon: 'pi pi-fw pi-power-off',
+                visible:this.validatorToken,
                 routerLink: ['/home'],
                 command(){
                     new AuthService().removeToken();

@@ -3,8 +3,11 @@ import { Component } from '@angular/core';
 import { Table } from 'primeng/table';
 
 import { Patient } from 'src/app/resources/models/Patient';
+import { PatientSchedule } from 'src/app/resources/models/PatientSchedule';
+import { Schedule } from 'src/app/resources/models/Schedule';
 
 import { PatientService } from 'src/app/resources/services/patient.service';
+import { ScheduleService } from 'src/app/resources/services/schedule.service';
 
 @Component({
   selector: 'app-patient',
@@ -13,35 +16,126 @@ import { PatientService } from 'src/app/resources/services/patient.service';
 })
 export class PatientComponent {
 
-  
-  public patients!: Patient[]
- 
-  loading: boolean = true;
 
-  constructor(private patientService: PatientService) { }
+  public patients: Patient[] = []
+  public schedules: Schedule[] = []
+  public patientSchedules: PatientSchedule[] = []
 
+  loadingA: boolean = true;
+  loadingB: boolean = true;
+
+  constructor(private patientService: PatientService, private scheduleService: ScheduleService) {
+    this.initialize();
+
+  }
   ngOnInit() {
-    this.getAllPatients();      
+
+  }
+
+  async initialize() {
+    await this.getAllPatients();
+    await this.getAllSchedules();
+    setTimeout(async () => {
+
+      await this.getPatientScheduled()
+    }, 1000);
   }
 
 
-   getAllPatients(): void {
+  async getPatientScheduled() {
 
-    this.patientService.getPatients().subscribe(
-       async (res: Patient[]) => {
-         this.patients = await res;
-        this.loading=false
-        console.log(this.patients);
+    let result: [{
+      fullname: string,
+      addressState: string,
+      addressDescription: string,
+      agentName: string,
+      agentImage: string,
+      register: any,
+      age: string,
+      status: string,
+      department: string,
+      date: any
+    }] = [{
+      fullname: "",
+      addressState: "",
+      addressDescription: "",
+      agentName: "",
+      agentImage: "",
+      register: "",
+      age: "",
+      status: "",
+      department: "",
+      date: ''
+    }];
+
+    const combinedData = this.patients.map(p => {
+
+      const matchingSchedule = this.schedules.find(s => s.patient.id === p.id);
+
+      if (matchingSchedule) {
+
+        return result.push({
+          fullname: p.name + ' ' + p.lastName,
+          addressState: p.address.state,
+          addressDescription: p.address.description,
+          agentName: p.agent.name,
+          agentImage: p.agent.image,
+          register: p.register,
+          age: p.age,
+          status: p.status,
+          department: matchingSchedule.department,
+          date: matchingSchedule.date
+        });
+      }
+
+      return null;
+    });
+    const conversion = result.slice(1, result.length)
+
+    conversion.map(el => {
+      this.patientSchedules = [
+        ...this.patientSchedules,
+        new PatientSchedule(el.fullname, el.addressState, el.addressDescription,
+          el.agentName, el.agentImage, el.register, el.age,
+          el.status, el.department, el.date)
+      ];
+
+
+    })
+
+
+  }
+
+
+
+  async getAllSchedules(): Promise<void> {
+    await this.scheduleService.getAllSchedules().subscribe(
+      (res: Schedule[]) => {
+        this.schedules = res;
+        this.loadingB = false
+        console.log(this.schedules);
       },
       (error: HttpErrorResponse) => {
         console.log(error.message);
-        this.loading=false
+        this.loadingB = false
       }
     )
   }
 
-  clear(table: Table) {
-    table.clear();
+
+  async getAllPatients(): Promise<void> {
+    await this.patientService.getPatients().subscribe(
+      (res: Patient[]) => {
+        this.patients = res;
+
+        this.loadingA = false
+        console.log(this.patients);
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error.message);
+        this.loadingA = false
+      }
+    )
   }
 
   getSeverity(status: string) {
@@ -65,14 +159,7 @@ export class PatientComponent {
     }
   }
 
-
-  
-  public getPatientsById(): void { }
-  public savePaients(): void { }
-  public updatePatients(): void { }
-  public deletePatients(): void { }
-
-
-  
-
+  clear(table: Table) {
+    table.clear();
+  }
 }

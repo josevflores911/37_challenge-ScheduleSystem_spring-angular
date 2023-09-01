@@ -1,10 +1,10 @@
 export class User {
     id?:number;
-    clave?: string;
-    login?: string;
+    password?: string;
+    username?: string;
 
-    constructor(clave:string,login:string){
-        this.clave=clave;
-        this.login=login;
+    constructor(password:string,username:string){
+        this.password=password;
+        this.username=username;
     }
 } 

@@ -6,7 +6,7 @@ import { Token } from '../models/Token';
 })
 export class AuthService {
 
-  public loginResponse:Token | undefined;
+  public loginResponse:Token | any;
 
   getToken():menu { 
     const tokenStorage:string|null =localStorage.getItem('token')

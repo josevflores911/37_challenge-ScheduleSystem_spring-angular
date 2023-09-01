@@ -39,6 +39,16 @@ export class PatientService {
     return this.http.get<Patient[]>(`${this.apiServerUrl}/patient/getall`, { headers });
   }
 
+
+  //getByDNI
+  public getPatientByDNI(dni: string): Observable<Patient> {
+    const token: string = this.authService.getToken().token;
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token.replace(/"/g, '')
+    });
+    return this.http.get<Patient>(`${this.apiServerUrl}/patient/getbydni/${dni}`,{headers})
+  }
+
   //getById
   public getPatientById(id: number): Observable<Patient> {
     return this.http.get<Patient>(`${this.apiServerUrl}/patient/get/${id}`);

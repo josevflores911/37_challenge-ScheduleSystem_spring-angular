@@ -1,4 +1,4 @@
-/* import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ScheduleComponent } from './schedule.component';
 
@@ -12,4 +12,4 @@ const routes: Routes = [{
   exports: [RouterModule]
 })
 export class ScheduleRoutingModule { }
- */
+ 

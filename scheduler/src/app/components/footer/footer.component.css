@@ -13,8 +13,9 @@ ul{
 .footer{
 	background-color: #24262b;
     padding: 20px 0;
-	position: absolute;
+	/* position: absolute; */
 	width: 100%;
+	bottom: 0 !important;
 	
     
 }
@@ -82,7 +83,7 @@ img{
 @media(max-width: 767px){
   .footer-col{
     width: 50%;
-    margin-bottom: 30px;
+    margin-bottom: 0px;
 }
 }
 @media(max-width: 574px){
