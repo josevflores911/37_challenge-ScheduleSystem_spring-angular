@@ -1,8 +1,10 @@
 package com.rang.scheduler.controllers;
 
 
+import com.rang.scheduler.entities.Patient;
 import com.rang.scheduler.entities.Schedule;
 
+import com.rang.scheduler.repositories.PatientRepository;
 import com.rang.scheduler.repositories.ScheduleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,8 @@ public class ScheduleController {
 
     @Autowired
     private ScheduleRepository scheduleRepository;
+    @Autowired
+    private PatientRepository patientRepository;
 
     @PostMapping("/add")
     public ResponseEntity<Schedule> addData(@RequestBody Schedule data) {
@@ -26,6 +30,20 @@ public class ScheduleController {
         return ResponseEntity.ok(data);
     }
 
+    @GetMapping("/getpatient/{id}")
+    public ResponseEntity<Schedule> getDataByPatientId(@PathVariable Long id) {
+
+        Patient patient = patientRepository.getReferenceById(id);
+        Schedule existingSchedule = scheduleRepository.findByPatient(patient);
+
+
+        if (existingSchedule != null) {
+
+            return ResponseEntity.ok(existingSchedule);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
     @GetMapping("/get/{id}")
     public ResponseEntity<Schedule> getDataById(@PathVariable Long id) {
         Schedule schedule = scheduleRepository.getReferenceById(id);
