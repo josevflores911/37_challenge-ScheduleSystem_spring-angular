@@ -3,6 +3,7 @@ import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Patient } from 'src/app/resources/models/Patient';
 import { Department, Schedule } from 'src/app/resources/models/Schedule';
+import { notificationService } from 'src/app/resources/services/notification.service';
 import { PatientService } from 'src/app/resources/services/patient.service';
 import { ScheduleService } from 'src/app/resources/services/schedule.service';
 import { SenderService } from 'src/app/resources/services/sender.service';
@@ -15,24 +16,29 @@ import { SenderService } from 'src/app/resources/services/sender.service';
 })
 export class ScheduleComponent {
 
+  schedule: Schedule;
+
   message: string = '';//test controller
 
-  receivedData: string | any;//dni to look patient
-  selectedPatient: Patient=new Patient("","","","","","","",null,null,"") 
-  schedule!: Schedule;
+  existPatient: boolean = false
+
+  receivedDNI: string | any;//dni to look patient
+  selectedPatient: Patient = new Patient()
   date!: Date;
 
   tempDepartment: any = { code: '' };
-  departments!: string;
+
   selectedDepartment: string = '';
 
   constructor(
     private patientService: PatientService
     , private scheduleService: ScheduleService
     , private senderService: SenderService
-    , private router: Router) {
+    , private router: Router
+    , private toastService: notificationService) {
 
-    this.receivedData = this.senderService.getData();
+    this.schedule = new Schedule();
+    this.receivedDNI = this.senderService.getData();
 
 
     this.tempDepartment = [
@@ -46,15 +52,16 @@ export class ScheduleComponent {
   }
 
   async initialize() {
-    await this.getAllPatients();
+    await this.getPatients();
 
   }
-  getAllPatients() {
-    this.patientService.getPatientByDNI(this.receivedData).subscribe((res) => {
-      console.log("res")
-      console.log(res)
+  async getPatients() {
+
+    await this.patientService.getPatientByDNI(this.receivedDNI).subscribe((res) => {
+
       this.selectedPatient = res
-      this.router.navigate(['/schedule']);
+
+      this.existPatient = !this.existPatient
     },
       error => {
         //console.error('Error:', error);
@@ -67,27 +74,47 @@ export class ScheduleComponent {
 
 
 
-  public handleClick(): void {
-    var jsonString = JSON.stringify((this.departments));
+  public saveSchedule(): void {
+    var jsonString = JSON.stringify(this.selectedDepartment);
     const jsonObject = JSON.parse(jsonString);
-    const department = jsonObject.code;
+    const mediumValue = jsonObject.code;
 
-    this.schedule = new Schedule(
-      this.selectedPatient,
-      department,
-      this.date
-    )
+    this.schedule.patient = this.selectedPatient
+    this.schedule.department = mediumValue
+    this.schedule.date = this.date
 
-    this.scheduleService.addSchedule(this.schedule).subscribe(
-      response => {
-        console.log('Response:', response);
-      },
-      error => {
-        console.error('Error:', error);
-      }
-    )
+    if (this.checkPatient(this.selectedPatient.id)) {
+
+        this.scheduleService.addSchedule(this.schedule).subscribe(
+        response => {
+          console.log('Response:', response);
+        },
+        error => {
+          console.error(this.schedule);
+          console.error('Error:', error);
+        }
+      )  
+    }else{
+      this.toastService.showErrorToast("patient scheduled","wait until date")
+    }
+
 
     this.router.navigate(['/table']);
+  }
+
+  private checkPatient(id: any):boolean {
+    let validSchedule = ''
+
+    this.scheduleService.getPatientById(id).subscribe((res) => {
+      console.log("res.date.toString()")
+      console.log(res.date.toString())
+      console.log("res.date.toString()")
+
+      validSchedule = res.date.toString()})
+    
+      console.log(validSchedule)
+    
+      return validSchedule!==''
   }
 
 

@@ -123,6 +123,123 @@ const newArr = [
 
 -->
 
+--------------------------------------------bad code
+
+  async getPatientScheduled() {
+
+    let result: [{
+      fullname: string,
+      addressState: string,
+      addressDescription: string,
+      agentName: string,
+      agentImage: string,
+      register: any,
+      age: string,
+      status: string,
+      department: string,
+      date: any
+    }] = [{
+      fullname: "",
+      addressState: "",
+      addressDescription: "",
+      agentName: "",
+      agentImage: "",
+      register: "",
+      age: "",
+      status: "",
+      department: "",
+      date: ''
+    }];
+
+    this.patients.map(p => {
+      const matchingSchedule = this.schedules.find(s => s.patient.id === p.id);
+      if (matchingSchedule) {
+        return result.push({
+          fullname: p.name + ' ' + p.lastName,
+          addressState: p.address.state,
+          addressDescription: p.address.description,
+          agentName: p.agent.name,
+          agentImage: p.agent.image,
+          register: p.register,
+          age: p.age,
+          status: p.status,
+          department: matchingSchedule.department,
+          date: matchingSchedule.date
+        });
+      }
+      return null;
+    });
+    
+    const conversion = result.slice(1, result.length)
+
+    conversion.map(el => {
+      this.patientSchedules = [
+        ...this.patientSchedules,
+        new PatientSchedule(el.fullname, el.addressState, el.addressDescription,
+          el.agentName, el.agentImage, el.register, el.age,
+          el.status, el.department, el.date)
+      ];
+
+
+    })
+
+
+  }
+
+
+
+-------------------------------------------------not destructuring
+
+async getPatientScheduled() {
+  let result: {
+    fullname: string;
+    addressState: string;
+    addressDescription: string;
+    agentName: string;
+    agentImage: string;
+    register: any;
+    age: string;
+    status: string;
+    department: string;
+    date: any;
+  }[] = [];
+
+  this.patients.forEach((p) => {
+    const matchingSchedule = this.schedules.find((s) => s.patient.id === p.id);
+    if (matchingSchedule) {
+      const fullName = p.name + ' ' + p.lastName;
+      const addressState = p.address.state;
+      const addressDescription = p.address.description;
+      const agentName = p.agent.name;
+      const agentImage = p.agent.image;
+      const register = p.register;
+      const age = p.age;
+      const status = p.status;
+      const department = matchingSchedule.department;
+      const date = matchingSchedule.date;
+
+      result.push({
+        fullname: fullName,
+        addressState: addressState,
+        addressDescription: addressDescription,
+        agentName: agentName,
+        agentImage: agentImage,
+        register: register,
+        age: age,
+        status: status,
+        department: department,
+        date: date,
+      });
+    }
+  });
+
+  // The rest of your code...
+}
+In this version, I've kept the result variable and avoided destructuring. Each property of the result objects is assigned explicitly, which may be less concise but maintains the structure you originally had in your code.
+
+
+
+
 
 
 

@@ -14,38 +14,46 @@ export class Patient {
     address?: Address | any;
     agent: Agent | any;
 
-    constructor(name: string, lastname: string, register: string
-        , age: string, status: string, phone: string, email: string, address?: Address|null
-        , agent?: Agent | null, dni?: string) {
+    constructor() {
 
-        this.name = name;
-        this.lastName = lastname;
-        this.register = register;
-        this.age = age;
-        this.status = status;
-        this.phone = phone;
-        this.email = email;
-        this.dni = dni;
-        this.address = address;
-        this.agent = agent;
+        this.name = "";
+        this.lastName = "";
+        this.register = "";
+        this.age = "";
+        this.status = "";
+        this.phone = "";
+        this.email = "";
+        this.dni = "";
+        this.address = null;
+        this.agent = null;
     }
 
     clean() {
-        return new Patient("", "", "", "", "", "", "", null, null, "")
+        return new Patient()
     }
+
+
+    validate(): string[] {
+
+        let retornoError: string[] = [];
+    
+        if (this.name === "" || this.lastName==="") {
+          retornoError.push('neither name or lastname cant be empty');
+        }
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    
+        if(!emailPattern.test(this.email)){
+            retornoError.push('please insert valid email field');
+        }
+    
+        if(parseInt(this.age)<0 || parseInt(this.age)>150){
+            retornoError.push('please insert valid age');
+        }
+    
+        return retornoError;
+      }
+    
 }
-
-/* export interface PatientSchedule{
-    name: string;
-    status: string;
-    address?: Address | any;
-    agent: Agent | any;
-    register: string | Date;
-    age: string;
-    department:string;
-    date: string | Date;
-} */
-
 
 export enum Status {
     HIGHER, MEDIUM, LOW, OTHER

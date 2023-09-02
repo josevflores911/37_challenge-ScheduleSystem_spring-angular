@@ -37,4 +37,14 @@ export class ScheduleService {
     return this.http.post<Schedule>(`${this.apiServerUrl}/schedule/add`, schedule, { headers });
   }
 
+  
+  
+  public getPatientById(id: number): Observable<Schedule> {
+    const token: string = this.authService.getToken().token ;
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token.replace(/"/g, '')
+    });
+    return this.http.get<Schedule>(`${this.apiServerUrl}/schedule/getpatient/${id}`,{ headers });
+  }
+
 }

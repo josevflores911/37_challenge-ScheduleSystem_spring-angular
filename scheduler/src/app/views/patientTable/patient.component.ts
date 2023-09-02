@@ -42,71 +42,39 @@ export class PatientComponent {
   }
 
 
+
+
   async getPatientScheduled() {
-
-    let result: [{
-      fullname: string,
-      addressState: string,
-      addressDescription: string,
-      agentName: string,
-      agentImage: string,
-      register: any,
-      age: string,
-      status: string,
-      department: string,
-      date: any
-    }] = [{
-      fullname: "",
-      addressState: "",
-      addressDescription: "",
-      agentName: "",
-      agentImage: "",
-      register: "",
-      age: "",
-      status: "",
-      department: "",
-      date: ''
-    }];
-
-    const combinedData = this.patients.map(p => {
-
-      const matchingSchedule = this.schedules.find(s => s.patient.id === p.id);
-
+    this.patients.forEach((p) => {
+      const matchingSchedule = this.schedules.find((s) => s.patient.id === p.id);
       if (matchingSchedule) {
-
-        return result.push({
-          fullname: p.name + ' ' + p.lastName,
-          addressState: p.address.state,
-          addressDescription: p.address.description,
-          agentName: p.agent.name,
-          agentImage: p.agent.image,
-          register: p.register,
-          age: p.age,
-          status: p.status,
-          department: matchingSchedule.department,
-          date: matchingSchedule.date
-        });
+        const {
+          name,
+          lastName,
+          address: { state, description },
+          agent: { name: agentName, image: agentImage },
+          register,
+          age,
+          status,
+        } = p;
+  
+        this.patientSchedules.push(
+          new PatientSchedule(
+            `${name} ${lastName}`,
+            state,
+            description,
+            agentName,
+            agentImage,
+            register,
+            age,
+            status,
+            matchingSchedule.department,
+            matchingSchedule.date
+          )
+        );
       }
-
-      return null;
     });
-    const conversion = result.slice(1, result.length)
-
-    conversion.map(el => {
-      this.patientSchedules = [
-        ...this.patientSchedules,
-        new PatientSchedule(el.fullname, el.addressState, el.addressDescription,
-          el.agentName, el.agentImage, el.register, el.age,
-          el.status, el.department, el.date)
-      ];
-
-
-    })
-
-
   }
-
-
 
   async getAllSchedules(): Promise<void> {
     await this.scheduleService.getAllSchedules().subscribe(

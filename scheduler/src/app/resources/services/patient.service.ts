@@ -55,7 +55,7 @@ export class PatientService {
   }
 
   //post(save)
-  public addPatient(patient: Patient): Observable<Patient> {
+  public addPatient(patient: Patient | undefined): Observable<Patient> {
     //const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const token: string = this.authService.getToken().token ;
     const headers = new HttpHeaders({

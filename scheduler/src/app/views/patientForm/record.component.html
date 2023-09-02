@@ -7,24 +7,24 @@
 
         <div style="display: flex;">
             <div class="input-field">
-                <p-calendar [(ngModel)]="date" class="p-inputtext-sm" aria-required="true"></p-calendar>
+                <p-calendar [disabled]="true" [(ngModel)]="date" class="p-inputtext-sm" aria-required="true"></p-calendar>
             </div>
             <div class="input-field">
                 <span class="p-float-label">
-                    <input pInputText id="name" [(ngModel)]="name" class="p-inputtext-sm" required />
+                    <input pInputText id="name" [(ngModel)]="patient.name" class="p-inputtext-sm" required />
                     <label htmlFor="name">name</label>
                 </span>
             </div>
             <div class="input-field">
                 <span class="p-float-label">
-                    <input pInputText id="lastname" [(ngModel)]="lastname" class="p-inputtext-sm" required />
+                    <input pInputText id="lastname" [(ngModel)]="patient.lastName" class="p-inputtext-sm" required />
                     <label htmlFor="lastname">lastname</label>
                 </span>
             </div>
             <div class="input-field">
                 <span class="p-float-label">
-                    <p-inputMask mask="999.999.999-99" [(ngModel)]="dni" placeholder="999.999.999-99"
-                        class="p-inputtext-sm"></p-inputMask>
+                    <p-inputMask [disabled]="true" mask="999.999.999-99" [(ngModel)]="dni" placeholder="999.999.999-99"
+                        class="p-inputtext-sm" ></p-inputMask>
                     <label htmlFor="dni">DNI</label>
                 </span>
             </div>
@@ -32,19 +32,19 @@
         <div style="display: flex;">
             <div class="input-field">
                 <span class="p-float-label">
-                    <input pInputText id="email" [(ngModel)]="email" class="p-inputtext-sm" required type="email" />
+                    <input pInputText id="email" [(ngModel)]="patient.email" class="p-inputtext-sm" required type="email" />
                     <label htmlFor="email">email</label>
                 </span>
             </div>
             <div class="input-field">
                 <span class="p-float-label">
-                    <input pInputText pKeyFilter="int" [(ngModel)]="age" class="p-inputtext-sm" required />
+                    <input pInputText pKeyFilter="int" [(ngModel)]="patient.age" class="p-inputtext-sm" required />
                     <label htmlFor="age">age</label>
                 </span>
             </div>
             <div class="input-field">
                 <span class="p-float-label">
-                    <p-inputMask mask="(999) 999-9999" [(ngModel)]="phone" placeholder="(999) 999-9999"
+                    <p-inputMask mask="(999) 999-9999" [(ngModel)]="patient.phone" placeholder="(999) 999-9999"
                         class="p-inputtext-sm"></p-inputMask>
                     <label htmlFor="phone">phone</label>
                 </span>
@@ -68,7 +68,7 @@
 
         <div>
             <div style="margin: 10px;">
-                <p-button label="Submit" (click)="handleClick('value')" styleClass="p-button-raised"></p-button>
+                <p-button label="Submit" (click)="savePatient('value')" styleClass="p-button-raised"></p-button>
             </div>
             <div style="margin: 10px;">
                 <p-button label="Return" (click)="goBack()" styleClass="p-button-raised"></p-button>
@@ -87,7 +87,7 @@
                     <label htmlFor="dni">DNI</label>
                 </span>
             </div>
-            <p-button label="Search" (click)="search(dni)" styleClass="p-button-raised"></p-button>
+            <p-button label="Search" (click)="searchPatient(dni)" styleClass="p-button-raised"></p-button>
         </div>
     </div>
 

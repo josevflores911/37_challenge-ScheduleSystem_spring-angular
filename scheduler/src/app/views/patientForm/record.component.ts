@@ -1,4 +1,4 @@
-import { Component, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Address } from 'src/app/resources/models/Address';
 import { Agent } from 'src/app/resources/models/Agent';
@@ -18,22 +18,15 @@ import { SenderService } from 'src/app/resources/services/sender.service';
 })
 export class RecordComponent {
 
-  patient?: Patient | null;
+  patient: Patient = new Patient();
 
   date: Date = new Date();
-
-  name: string = '';
-  lastname: string = '';
   dni: string = '';
-  email: string = '';
-  age: string = '';
-  phone: string = '';
 
   address: Address[] | any | null;
   selectedaddress: Address | any;
 
   tempStatus: any = { code: '' };
-  status: Status[] | any;
   selectedstatus: string = '';
 
   agent: Agent[] | any;
@@ -74,7 +67,7 @@ export class RecordComponent {
   }
 
 
-  public search(dni: string) {
+  public searchPatient(dni: string) {
 
     this.patientService.getPatientByDNI(dni).subscribe((res) => {
       this.toastService.showSuccessToast("patient found")
@@ -84,7 +77,7 @@ export class RecordComponent {
       error => {
         if (dni !== '') {
           this.newRecord = !this.newRecord
-          this.toastService.showErrorToast("not found")
+          this.toastService.showErrorToast("not found", "insert a new record")
         } else {
           this.toastService.showErrorToast("fill 14 digits")
 
@@ -93,81 +86,62 @@ export class RecordComponent {
         //console.error('Error:', error);
       })
 
-    //check empty fields
-    /*  let errorLog = this.contestItem.validate(this.modalState);
- 
-     
-     if (errorLog.length === 0) {
-       this.contestSrv
-         .saveContest(this.contestItem.payload, this.contestItem.id)
-         .subscribe((ev) => {
-           this.toastSrv.showSuccessToast(
-             'Contest Saved!',
-             this.contestItem.name + ' Contest edited successfully!'
-           );
-           this.isLoading = false;
-           this.dialogRef.close(this.contestItem);
-         });
-     } else {
-       this.isLoading = false;
-       errorLog.forEach((res) => {
-         this.toastSrv.showErrorToast(
-           res,
-           'please, fix this errors and try again'
-         );
-       }); */
+    
 
   }
 
 
-  public handleClick(arg: string) {
+  public savePatient(arg: string) {
 
     var jsonString = JSON.stringify((this.selectedstatus));
     const jsonObject = JSON.parse(jsonString);
     const mediumValue = jsonObject.code;
 
-    this.patient = new Patient(
-      this.name,
-      this.lastname,
-      this.date.toJSON().slice(0, 10),
-      this.age,
-      mediumValue,
-      //this.phone.replace(/\D/g, ''),
-      this.phone,
-      this.email,
-      this.selectedaddress,
-      this.selectedagent,
-      this.dni
-    )
+    this.patient.register = this.date.toJSON().slice(0, 10);
+    this.patient.address = this.selectedaddress;
+    this.patient.agent = this.selectedagent;
+    this.patient.status = mediumValue;
+    this.patient.dni = this.dni
+
+    //this.phone.replace(/\D/g, ''),
 
     console.log(this.patient);
 
-    this.patientService.addPatient(this.patient).subscribe(
-      response => {
-        console.log('Response:', response);
-      },
-      error => {
-        console.error('Error:', error);
-      }
-    );
+    let errorLog = this.patient.validate()
 
-    this.senderService.setData(this.dni);
+    if (errorLog.length === 0) {
+      this.patientService.addPatient(this.patient).subscribe(
+        response => {
+          console.log('Response:', response);
+        },
+        error => {
+          console.error('Error:', error);
+        }
+      );
 
-    this.patient=this.patient.clean()
+      this.senderService.setData(this.dni);
+      this.patient = this.patient.clean()
+      this.router.navigate(['/schedule']);
+      this.toastService.showSuccessToast("recorded")
+    } else {
 
+      errorLog.forEach((res) => {
+        this.toastService.showErrorToast(
+          res,
+          'please, fix this errors and try again'
+        );
+      });
 
-    this.router.navigate(['/schedule']);
-
-    this.toastService.showSuccessToast("recorded")
+    }
 
   }
 
-  goBack(){
-    this.newRecord=!this.newRecord
+  goBack() {
+    this.newRecord = !this.newRecord
   }
 
 
- 
+
   onDropdownChange(event: any) {
 
   }

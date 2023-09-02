@@ -1,6 +1,6 @@
 <div class="wrap">
-    <div class="containers">
-        <div style="display: flex;" >
+    <div class="containers" >
+        <div style="display: flex;"  *ngIf="existPatient">
             <div  style="display: flex;justify-items: center;align-items: center; flex-direction: column;margin-right: 10%;">
                 <h1>Schedule</h1>
                 <p>Please provide an available date:</p>
@@ -16,14 +16,8 @@
                 <p>name:{{selectedPatient.name}}</p>
                 <p>lastname:{{selectedPatient.lastName}}</p>
                
-                <p-button label="Submit" (click)="handleClick()" styleClass="p-button-raised"></p-button>
+                <p-button label="Submit" (click)="saveSchedule()" styleClass="p-button-raised"></p-button>
             </div>
-            
-            
-           <!--  <div>
-                <p>name:name</p>
-                <p>lastname:lastname</p>
-            </div> -->
 
         </div>
     </div>
