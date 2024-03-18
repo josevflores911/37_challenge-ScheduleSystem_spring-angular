@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Table } from 'primeng/table';
 
 import { Patient } from 'src/app/resources/models/Patient';
@@ -12,42 +12,85 @@ import { ScheduleService } from 'src/app/resources/services/schedule.service';
 @Component({
   selector: 'app-patient',
   templateUrl: './patient.component.html',
-  styleUrls: ['./patient.component.css']
+  styleUrls: ['./patient.component.css'],
 })
-export class PatientComponent {
+export class PatientComponent implements OnInit, OnDestroy {
+  public patients: Patient[] = [];
+  public schedules: Schedule[] = [];
+  public patientSchedules: PatientSchedule[] = [];
 
+  loadingPatients: boolean = false;
+  loadingSchedule: boolean = false;
 
-  public patients: Patient[] = []
-  public schedules: Schedule[] = []
-  public patientSchedules: PatientSchedule[] = []
+  constructor(
+    private patientService: PatientService,
+    private scheduleService: ScheduleService
+  ) {}
 
-  loadingA: boolean = true;
-  loadingB: boolean = true;
-
-  constructor(private patientService: PatientService, private scheduleService: ScheduleService) {
-    this.initialize();
-
-  }
   ngOnInit() {
-
+    this.starter();
   }
 
-  async initialize() {
-    await this.getAllPatients();
-    await this.getAllSchedules();
-    setTimeout(async () => {
+ 
+  async starter() {
+    try {
+      this.loadingPatients = true;
+      this.loadingSchedule = true;
 
-      await this.getPatientScheduled()
-    }, 1000);
+      await Promise.all([this.getAllPatients(), this.getAllSchedules()]);
+      // this.getPatientScheduled();
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      // this.errorFetchingData = true;
+    } finally {
+      this.loadingPatients = false;
+      this.loadingSchedule = false;
+    }
+  }
+
+  ngOnDestroy() {
+    // Realiza alguna limpieza si es necesario
+  }
+
+   getAllPatients(): void {
+     this.loadingPatients = true;
+     this.patientService.getPatients().subscribe({
+       next: (res: Patient[]) => {
+         this.patients = res;
+         console.log(res);
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log(error.message);
+        this.loadingPatients = false;
+      },
+    });
+  }
+
+   getAllSchedules(): void {
+    
+    this.loadingSchedule = true;
+    this.scheduleService.getAllSchedules().subscribe({
+      next: (res: Schedule[]) => {
+        this.schedules = res;
+         this.getPatientScheduled();
+        console.log(res);
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log(error.message);
+        this.loadingSchedule = false;
+      },
+    });
   }
 
 
-
-
-  async getPatientScheduled() {
-    this.patients.forEach((p) => {
-      const matchingSchedule = this.schedules.find((s) => s.patient.id === p.id);
-      if (matchingSchedule) {
+   getPatientScheduled() {
+    console.log('c');
+     this.patients.forEach((p) => {
+      const matchingSchedule = this.schedules.filter(
+        (s) => s.patient.id === p.id
+      ).forEach((e, i) => {
+      
+        if (e) {
         const {
           name,
           lastName,
@@ -57,7 +100,7 @@ export class PatientComponent {
           age,
           status,
         } = p;
-  
+
         this.patientSchedules.push(
           new PatientSchedule(
             `${name} ${lastName}`,
@@ -68,43 +111,22 @@ export class PatientComponent {
             register,
             age,
             status,
-            matchingSchedule.department,
-            matchingSchedule.date
+            e.department,
+            e.date
           )
         );
       }
-    });
-  }
-
-  async getAllSchedules(): Promise<void> {
-    await this.scheduleService.getAllSchedules().subscribe(
-      (res: Schedule[]) => {
-        this.schedules = res;
-        this.loadingB = false
-        console.log(this.schedules);
-      },
-      (error: HttpErrorResponse) => {
-        console.log(error.message);
-        this.loadingB = false
+        
       }
-    )
+      );
+
+       
+    
+     });
   }
 
+  
 
-  async getAllPatients(): Promise<void> {
-    await this.patientService.getPatients().subscribe(
-      (res: Patient[]) => {
-        this.patients = res;
-
-        this.loadingA = false
-        console.log(this.patients);
-      },
-      (error: HttpErrorResponse) => {
-        console.log(error.message);
-        this.loadingA = false
-      }
-    )
-  }
 
   getSeverity(status: string) {
     switch (status.toLowerCase()) {
@@ -120,8 +142,6 @@ export class PatientComponent {
       case 'other':
         return 'warning';
 
-      case 'medium':
-        return null;
       default:
         return null;
     }

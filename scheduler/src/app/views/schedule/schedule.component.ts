@@ -12,18 +12,16 @@ import { SenderService } from 'src/app/resources/services/sender.service';
   selector: 'app-schedule',
   templateUrl: './schedule.component.html',
   styleUrls: ['./schedule.component.css'],
-
 })
 export class ScheduleComponent {
-
   schedule: Schedule;
 
-  message: string = '';//test controller
+  message: string = ''; //test controller
 
-  existPatient: boolean = false
+  existPatient: boolean = false;
 
-  receivedDNI: string | any;//dni to look patient
-  selectedPatient: Patient = new Patient()
+  receivedDNI: string | any; //dni to look patient
+  selectedPatient: Patient = new Patient();
   date!: Date;
 
   tempDepartment: any = { code: '' };
@@ -31,102 +29,80 @@ export class ScheduleComponent {
   selectedDepartment: string = '';
 
   constructor(
-    private patientService: PatientService
-    , private scheduleService: ScheduleService
-    , private senderService: SenderService
-    , private router: Router
-    , private toastService: notificationService) {
-
+    private patientService: PatientService,
+    private scheduleService: ScheduleService,
+    private senderService: SenderService,
+    private router: Router,
+    private toastService: notificationService
+  ) {
     this.schedule = new Schedule();
     this.receivedDNI = this.senderService.getData();
-
 
     this.tempDepartment = [
       { code: Department[1] },
       { code: Department[0] },
       { code: Department[2] },
       { code: Department[3] },
-    ]
-    this.initialize()
-
+    ];
+    this.initialize();
   }
 
-  async initialize() {
-    await this.getPatients();
-
+  initialize() {
+    this.getPatients();
   }
   async getPatients() {
+    this.patientService.getPatientByDNI(this.receivedDNI).subscribe({
+      next: (res) => {
+        this.selectedPatient = res;
 
-    await this.patientService.getPatientByDNI(this.receivedDNI).subscribe((res) => {
-
-      this.selectedPatient = res
-
-      this.existPatient = !this.existPatient
-    },
-      error => {
+        this.existPatient = !this.existPatient;
+      },
+      error: (error) => {
         //console.error('Error:', error);
-      })
+      },
+    });
   }
 
   ngOnInit(): void {
     this.getMessageTest();
   }
 
-
-
   public saveSchedule(): void {
     var jsonString = JSON.stringify(this.selectedDepartment);
     const jsonObject = JSON.parse(jsonString);
     const mediumValue = jsonObject.code;
 
-    this.schedule.patient = this.selectedPatient
-    this.schedule.department = mediumValue
-    this.schedule.date = this.date
+    this.schedule.patient = this.selectedPatient;
+    this.schedule.department = mediumValue;
+    this.schedule.date = this.date;
 
-    if (this.checkPatient(this.selectedPatient.id)) {
-
-        this.scheduleService.addSchedule(this.schedule).subscribe(
-        response => {
+    if (!this.checkPatient(this.selectedPatient.id)) {
+      this.scheduleService.addSchedule(this.schedule).subscribe({
+        next: (response) => {
           console.log('Response:', response);
         },
-        error => {
+        error: (error) => {
           console.error(this.schedule);
           console.error('Error:', error);
-        }
-      )  
-    }else{
-      this.toastService.showErrorToast("patient scheduled","wait until date")
+        },
+      });
+    } else {
+      this.toastService.showErrorToast('patient scheduled', 'wait until date');
     }
-
 
     this.router.navigate(['/table']);
   }
 
-  private checkPatient(id: any):boolean {
-    let validSchedule = ''
-
+  private checkPatient(id: any): boolean {
+    let validSchedule = null;
     this.scheduleService.getPatientById(id).subscribe((res) => {
-      console.log("res.date.toString()")
-      console.log(res.date.toString())
-      console.log("res.date.toString()")
+      validSchedule = res.date;
+    });
 
-      validSchedule = res.date.toString()})
-    
-      console.log(validSchedule)
-    
-      return validSchedule!==''
+    console.log(validSchedule != null);
+
+    return validSchedule != null;
   }
 
-
-
-  public getMessageTest(): void {
-    /* this.patientService.getTry().subscribe(
-      (res: any) => {
-        this.message = JSON.stringify(res);
-      },
-      (error: HttpErrorResponse) => {
-        console.log(error.message);
-      }
-    ) */
-  }
+  public getMessageTest(): void {}
 }

@@ -47,12 +47,12 @@ export class HeaderComponent implements OnInit {
                 routerLink: ['/patient'],
                 visible:this.validatorToken
             },
-            {
-                label: 'Schedule',
-                icon: 'pi pi-fw pi-user',
-                routerLink: ['/schedule'],
-                visible:this.validatorToken
-            },
+            // {
+            //     label: 'Schedule',
+            //     icon: 'pi pi-fw pi-user',
+            //     routerLink: ['/schedule'],
+            //     visible:this.validatorToken
+            // },
             {
                 label: 'Table',
                 icon: 'pi pi-fw pi-user',
