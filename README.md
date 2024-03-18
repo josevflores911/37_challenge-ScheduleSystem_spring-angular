@@ -1,5 +1,11 @@
 <h1>Hola!!</h1>
 
+to start: 
+<ul>
+  <li>npm i</li>
+  <li>ng serve</li>
+</ul>
+
 ![gatito](https://github.com/josevflores911/Schedule_system/assets/59713685/338d6ee7-44b0-4a23-b3c2-ac67cca8d11d)
 
 
