@@ -8,6 +8,11 @@ to start:
 
 ![gatito](https://github.com/josevflores911/Schedule_system/assets/59713685/338d6ee7-44b0-4a23-b3c2-ac67cca8d11d)
 
+bugs:
+<ul>
+  <li>.</li>
+  <li>.</li>
+</ul>
 
 ![home page](https://github.com/josevflores911/challenge-ScheduleSystem/assets/59713685/350495f2-0d73-4b19-a9b9-57d7f2ff17b4)
 
