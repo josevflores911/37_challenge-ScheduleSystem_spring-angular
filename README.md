@@ -8,6 +8,26 @@ to start:
 
 ![gatito](https://github.com/josevflores911/Schedule_system/assets/59713685/338d6ee7-44b0-4a23-b3c2-ac67cca8d11d)
 
+
+Dockerfile
+
+# Stage 1: Create Docker network
+FROM alpine:latest AS network-creator
+RUN apk add --no-cache docker
+RUN docker network create --driver bridge redapiname
+
+# Stage 2: Run MySQL container
+FROM mysql:8.0 AS mysql-container
+ENV MYSQL_ALLOW_EMPTY_PASSWORD=yes
+RUN docker container run -d -p 3306:3306 --network redapiname --name mysqlname mysql:8.0
+
+# Stage 3: Run main application container
+FROM imagename AS app-container
+ENV DB_HOST=mysqlname
+ENV DB_PASSWORD=2812
+RUN docker container run --rm -p 8080:8080 --network redapiname imagename
+
+
 bugs:
 <ul>
   <li>.</li>
