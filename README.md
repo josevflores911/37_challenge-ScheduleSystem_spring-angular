@@ -38,7 +38,8 @@ bugs:
 <!-- ![home page](https://github.com/josevflores911/challenge-ScheduleSystem/assets/59713685/350495f2-0d73-4b19-a9b9-57d7f2ff17b4 ) -->
 
 <img src="[https://github.com/josevflores911/challenge-ScheduleSystem/assets/59713685/350495f2-0d73-4b19-a9b9-57d7f2ff17b4](https://github.com/josevflores911/challenge-ScheduleSystem/assets/59713685/c3e0a331-24a9-48b5-8d3e-65ada7cdac79)" alt="login" width="400">
-<!-- ![login](https://github.com/josevflores911/challenge-ScheduleSystem/assets/59713685/c3e0a331-24a9-48b5-8d3e-65ada7cdac79 | width=400) -->
+
+<!-- ![login](https://github.com/josevflores911/challenge-ScheduleSystem/assets/59713685/c3e0a331-24a9-48b5-8d3e-65ada7cdac79) -->
 
 ![look patient ifnot add patient](https://github.com/josevflores911/challenge-ScheduleSystem/assets/59713685/f007e49b-b0ee-4303-a3e8-0d60fbfd10a7 | width=400)
 
